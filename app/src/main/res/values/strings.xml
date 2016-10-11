@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HalitranApp</string>
+    <string name="valider">Valider</string>
+    <string name="annuler">Annuler</string>
 </resources>

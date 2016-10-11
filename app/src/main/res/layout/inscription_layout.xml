@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Pseudo"
+        android:gravity="center"
+        android:ems="10"
+        android:id="@+id/inscription_pseudo" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Prénom"
+        android:gravity="center"
+        android:ems="10"
+        android:id="@+id/inscription_prenom" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Nom"
+        android:gravity="center"
+        android:ems="10"
+        android:id="@+id/inscription_nom" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="Adresse email"
+        android:gravity="center"
+        android:ems="10"
+        android:id="@+id/inscription_email" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:hint="Mot de passe"
+        android:ems="10"
+        android:id="@+id/inscription_mdp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:hint="Confirmation"
+        android:ems="10"
+        android:id="@+id/inscription_mdp_confirmation" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:text="@string/valider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/inscription_valider"
+            android:onClick="valider"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="@string/annuler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/inscription_annuler"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

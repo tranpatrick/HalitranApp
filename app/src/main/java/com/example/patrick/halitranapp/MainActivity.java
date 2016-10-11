@@ -2,6 +2,7 @@ package com.example.patrick.halitranapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.EditText;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -16,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    private void test(){
-        RequestQueue rq = newRequestQueue(this);
-    }
+
+
 }
