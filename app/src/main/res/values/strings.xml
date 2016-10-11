@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">HalitranApp</string>
+    <string name="loginHint">login</string>
+    <string name="passwordHint">password</string>
+    <string name="loginButton">Connexion</string>
+    <string name="resetButton">Reset</string>
+    <string name="loginActivity"><u>LoginActivity</u></string>
+    <string name="createUserTextView"><u>Register a new account ?</u></string>
+
 </resources>
