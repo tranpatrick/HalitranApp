@@ -2,9 +2,14 @@
     <string name="app_name">HalitranApp</string>
     <string name="loginHint">login</string>
     <string name="passwordHint">password</string>
-    <string name="loginButton">Connexion</string>
+    <string name="confirmPasswordHint">confirm password</string>
+    <string name="mailHint">mail address</string>
+    <string name="nameHint">name</string>
+    <string name="lastNameHint">name</string>
+    <string name="loginButton">Sign in</string>
     <string name="resetButton">Reset</string>
     <string name="loginActivity"><u>LoginActivity</u></string>
-    <string name="createUserTextView"><u>Register a new account ?</u></string>
-
+    <string name="createUserTextView"><u>Sign up</u></string>
+    <string name="valider">Register</string>
+    <string name="annuler">Cancel</string>
 </resources>

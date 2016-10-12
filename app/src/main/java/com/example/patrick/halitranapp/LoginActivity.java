@@ -131,7 +131,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void openCreateUserActivity(View view) {
-        Toast.makeText(this, "Not Implemented Yet", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Not Implemented Yet", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
 }

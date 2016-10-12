@@ -6,15 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-
-import static com.android.volley.toolbox.Volley.newRequestQueue;
-
 public class MainActivity extends AppCompatActivity {
 
-    HalitranApplication mApp;
-    TextView textView;
+    private HalitranApplication mApp;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this,LoginActivity.class));
     }
 
-    private void test(){
-        RequestQueue rq = newRequestQueue(this);
-    }
+
+
 }

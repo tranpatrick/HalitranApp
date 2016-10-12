@@ -53,8 +53,7 @@
             android:onClick="connexion"
             android:text="@string/loginButton"
             android:id="@+id/loginButton"
-            android:enabled="false"
-            style="@android:style/Widget.Material.Button.Colored" />
+            android:enabled="false" />
 
         <Button
             android:layout_width="0dp"
@@ -69,11 +68,7 @@
             android:onClick="resetForm"
             android:text="@string/resetButton"
             android:id="@+id/resetButton"
-            android:enabled="false"
-            style="@android:style/Widget.Material.Button.Colored" />
+            android:enabled="false" />
     </LinearLayout>
-
-
-
 
 </LinearLayout>
