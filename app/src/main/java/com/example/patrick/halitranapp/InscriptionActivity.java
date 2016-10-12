@@ -67,7 +67,7 @@ public class InscriptionActivity extends AppCompatActivity {
 
         /* Verification du mdp */
         if (!mdp.equals(mdp_conf)) {
-            Toast.makeText(this, "Les mots de passes doivent correspondre", 5).show();
+            Toast.makeText(this, "Passwords should match", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -87,13 +87,19 @@ public class InscriptionActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            System.out.println(response.toString());
-                            String rep = response.getString("message");
-                            /* partie pour une reponse negative */
-                            
+                            //System.out.println(response.toString());
+                            if(response.has("erreur")){
+                                Toast.makeText(getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
+                            }else if(response.has("JSON")){
+                                Toast.makeText(getApplicationContext(), "Account successfully created", Toast.LENGTH_LONG).show();
+                                /* retourner à l'activité de connexion */
+                            }else{
+                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
 
                         } catch (JSONException je) {
-                            /* partie pour une reponse positive */
 
                         }
                     }
