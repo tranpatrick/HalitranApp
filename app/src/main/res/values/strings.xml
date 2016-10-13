@@ -12,4 +12,7 @@
     <string name="createUserTextView"><u>Sign up</u></string>
     <string name="valider">Register</string>
     <string name="annuler">Cancel</string>
+    <string name="opendrawer">open drawer</string>
+    <string name="closedrawer">open drawer</string>
+    <string name="actionsearch">search messages</string>
 </resources>
