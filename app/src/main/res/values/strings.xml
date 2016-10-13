@@ -9,6 +9,7 @@
     <string name="loginButton">Sign in</string>
     <string name="resetButton">Reset</string>
     <string name="loginActivity"><u>LoginActivity</u></string>
+    <string name="getMessageActivity"><u>GetMessageActivity</u></string>
     <string name="createUserTextView"><u>Sign up</u></string>
     <string name="valider">Register</string>
     <string name="annuler">Cancel</string>
