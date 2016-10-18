@@ -13,7 +13,6 @@ import android.view.Window;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
     private HalitranApplication mApp;
     private TextView textView;
 
@@ -50,7 +49,5 @@ public class MainActivity extends AppCompatActivity {
                 ActivityOptions
                         .makeSceneTransitionAnimation(this).toBundle());
     }
-
-
 
 }

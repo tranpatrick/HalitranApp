@@ -11,17 +11,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.patrick.halitranapp.GetMessageActivity">
 
-    <Button
-        android:text="refresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="getMessages"
-        android:textAlignment="viewStart" />
-
-    <ListView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"></ListView>
+        android:id="@+id/content_frame"></FrameLayout>
 
 
 </LinearLayout>
