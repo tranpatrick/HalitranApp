@@ -10,6 +10,8 @@ public class Util {
 
     public static String INSCRIPTION = "CreateUser";
     public static final String LOGIN = "Login";
+    public static final String DISPLAY_TWEET = "DisplayTweet";
+    public static final String REMOVE_TWEET = "Tweet/Remove";
 
     public static String addFirstParameter(String url, String parameter, String value) {
         return url+"?"+parameter+"="+value;
