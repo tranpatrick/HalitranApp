@@ -6,10 +6,12 @@ package com.example.patrick.halitranapp;
 
 public class Util {
 
-    public static String ServerAdress = "http://132.227.201.129:8280/HALIFA_TRAN2/";
+    public static String ServerAdress = "http://vps197081.ovh.net:8080/HALIFA_TRAN/";
 
     public static String INSCRIPTION = "CreateUser";
     public static final String LOGIN = "Login";
+    public static final String DISPLAY_TWEET = "DisplayTweet";
+    public static final String REMOVE_TWEET = "Tweet/Remove";
 
     public static String addFirstParameter(String url, String parameter, String value) {
         return url+"?"+parameter+"="+value;
