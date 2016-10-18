@@ -30,7 +30,7 @@ import android.widget.TextView;
 
 //TODO supprimer activity_main layout
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener{
     private HalitranApplication mApp;
     private TextView textView;
 
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         // update the main content by replacing fragments
         Fragment fragment = null;
         if(position == 0) {
-            fragment = new AccountFragment();
+            fragment = new HomeFragment();
         }else if(position == 1) {
             //fragment = new ProfileFragment();
         }else
