@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
+    /* Pour la barre de recherche */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // The action bar home/up action should open or close the drawer.
@@ -141,20 +142,23 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    /* Permet de selectionner le fragment voulu */
     private void selectItem(int position) {
         // update the main content by replacing fragments
-        /* Fragment fragment = new PlanetFragment();
-        Bundle args = new Bundle();
-        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-        fragment.setArguments(args);
+        Fragment fragment = null;
+        if(position == 0) {
+            fragment = new AccountFragment();
+        }else if(position == 1) {
+            //fragment = new ProfileFragment();
+        }else
+            fragment = new AccountFragment();
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
         // update selected item and title, then close the drawer
-        mDrawerList.setItemChecked(position, true);
-        setTitle(mPlanetTitles[position]);
-        mDrawerLayout.closeDrawer(mDrawerList); */
+        drawerList.setItemChecked(position, true);
+        drawerLayout.closeDrawer(drawerList);
     }
 
     @Override

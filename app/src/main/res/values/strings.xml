@@ -15,4 +15,20 @@
     <string name="opendrawer">open drawer</string>
     <string name="closedrawer">open drawer</string>
     <string name="actionsearch">search messages</string>
+    <string name="mailaddress">Mail address</string>
+    <string name="myaccount">My Account</string>
+    <string name="changeaccountparameter">Change my account parameters</string>
+    <string name="passwordAccount">Password</string>
+    <string name="changepassword">Change your password</string>
+    <string name="currentpassword">Current password</string>
+    <string name="newpassword">New password</string>
+    <string name="confirmpassword">Confirm password</string>
+    <string name="savechanges">Save changes</string>
+    <string name="deletealltweets">Delete all my tweets</string>
+    <string name="unsubscribe">Unsubscribe form Halitran</string>
+    <string name="username">Username</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

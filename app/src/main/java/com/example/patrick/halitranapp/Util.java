@@ -6,7 +6,7 @@ package com.example.patrick.halitranapp;
 
 public class Util {
 
-    public static String ServerAdress = "http://132.227.201.129:8280/HALIFA_TRAN2/";
+    public static String ServerAdress = "http://vps197081.ovh.net:8080/HALIFA_TRAN/";
 
     public static String INSCRIPTION = "CreateUser";
     public static final String LOGIN = "Login";
