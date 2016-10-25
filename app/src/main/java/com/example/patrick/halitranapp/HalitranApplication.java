@@ -31,13 +31,16 @@ public class HalitranApplication extends Application {
     public void onCreate() {
         super.onCreate();
         messages = new ArrayList<Message>();
+    }
 
+    public void saveUsersId(String login, String pwd){
         // ça c'est pour garder le login et pwd de l'utilisateur dans un fichier afin de ne pas se reco à chaque fois
         // crée un fichier preferences avec ses id
-        /*getSharedPreferences("user", MODE_PRIVATE)
+        getSharedPreferences("user", MODE_PRIVATE)
                 .edit()
-                .putString("", "")
-        .commit();*/
+                .putString("Login", login)
+                .putString("Password", pwd)
+                .commit();
     }
 
     public String getLogin() {
