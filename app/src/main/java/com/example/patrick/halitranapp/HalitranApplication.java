@@ -40,7 +40,7 @@ public class HalitranApplication extends Application {
                 .edit()
                 .putString("Login", login)
                 .putString("Password", pwd)
-                .commit();
+                .apply();
     }
 
     public String getLogin() {

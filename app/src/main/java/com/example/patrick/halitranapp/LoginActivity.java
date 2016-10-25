@@ -1,6 +1,7 @@
 package com.example.patrick.halitranapp;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -31,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     boolean isLoginValid;
     boolean isPasswordValid;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +44,10 @@ public class LoginActivity extends AppCompatActivity {
         resetButton = (Button) findViewById(R.id.resetButton);
 
         /* Connecter l'utilisateur déjà loggé */
-        if(isUserLogged())
+        if (isUserLogged()) {
+            Log.i("onCreate", "je passe dans le if isUserLogged");
             connexionDuplicata();
+        }
 
         loginEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -83,37 +85,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        /* Connecter l'utilisateur déjà loggé */
-        if(isUserLogged()) {
-            Log.i("onRestart", "je passe ici");
-            connexionDuplicata();
-        }
-    }
-
-    @Override
-    public void onRestart(){
-        super.onRestart();
-        /* Connecter l'utilisateur déjà loggé */
-        if(isUserLogged()) {
-            Log.i("onRestart", "je passe ici");
-            connexionDuplicata();
-        }
-    }
-
     protected void refreshButtonsStates() {
         loginButton.setEnabled(isLoginValid && isPasswordValid);
         resetButton.setEnabled(isLoginValid && isPasswordValid);
     }
 
-    public void connexionDuplicata(){
+    public void connexionDuplicata() {
         final String login = loginEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
-        String loginRequestUrl = Util.ServerAdress+Util.LOGIN;
-        loginRequestUrl = Util.addFirstParameter(loginRequestUrl,"login",login);
-        loginRequestUrl = Util.addParameter(loginRequestUrl,"password", password);
+        String loginRequestUrl = Util.ServerAdress + Util.LOGIN;
+        loginRequestUrl = Util.addFirstParameter(loginRequestUrl, "login", login);
+        loginRequestUrl = Util.addParameter(loginRequestUrl, "password", password);
         Log.i("URL", loginRequestUrl);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, loginRequestUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -126,15 +108,15 @@ public class LoginActivity extends AppCompatActivity {
                                 mApp.setKey(response.getString("key"));
                                 mApp.setLogin(response.getString("login"));
                                 Intent intent = new Intent(mApp, MainActivity.class);
-                                startActivity(intent);
-                            }
-                            else {
-                                Toast.makeText(mApp, response.getString("message"), Toast.LENGTH_SHORT).show();
                                 /* Enregistrer les id utilisateurs dans les preferences */
                                 mApp.saveUsersId(login, password);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(mApp, response.getString("message"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            Log.i("LoginActivity", "onResponse - "+e.getMessage());
+                            Log.i("LoginActivity", "onResponse - " + e.getMessage());
                         }
                     }
                 },
@@ -143,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.i("LoginActivity", "onErrorResponse - "+error.getMessage().toString());
+                        Log.i("LoginActivity", "onErrorResponse - " + error.getMessage().toString());
                         Toast.makeText(mApp, "Probleme reseau", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -165,15 +147,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /* méthode pour vérifier si un uilisateur est loggé */
-    private boolean isUserLogged(){
-        if(mApp.getSharedPreferences("user", MODE_PRIVATE).contains("Login")
-                && mApp.getSharedPreferences("user", MODE_PRIVATE).contains("Password")){
+    private boolean isUserLogged() {
+        Log.i("isUserLogged", "je passe dans isUserLogged");
+        if (getSharedPreferences("user", MODE_PRIVATE).contains("Login")
+                && getSharedPreferences("user", MODE_PRIVATE).contains("Password")) {
             loginEditText.setText(mApp.getSharedPreferences("user", MODE_PRIVATE).getString("Login", ""));
             passwordEditText.setText(mApp.getSharedPreferences("user", MODE_PRIVATE).getString("Password", ""));
             return true;
-        }else{
+        } else {
             return false;
         }
     }
+
+
 
 }
