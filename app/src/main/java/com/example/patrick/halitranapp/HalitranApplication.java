@@ -26,6 +26,7 @@ public class HalitranApplication extends Application {
     private String key;
     private RequestQueue requestQueue;
     private List<Message> messages;
+    //TODO ptet rajouter des autres listes, 1 pour searchResult, 1 pour visite profil
 
     @Override
     public void onCreate() {

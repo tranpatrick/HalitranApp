@@ -51,6 +51,12 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             holder.auteur = (TextView) convertView.findViewById(R.id.auteur);
             holder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
             convertView.setTag(holder);
+
+            //TODO gestion des liens, faire comme dealabs
+            /*
+                holder.texte.setOnClickListerner()
+                affiche un tableau avec les choix des liens
+             */
         }
 
         final ViewHolder holder = (ViewHolder) convertView.getTag();
@@ -87,6 +93,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                         try {
                             if (!response.has("erreur")) {
                                 remove(m);
+                                Toast.makeText( mApp, "Tweet successfully removed", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(mApp, response.getString("message"), Toast.LENGTH_SHORT).show();
                             }

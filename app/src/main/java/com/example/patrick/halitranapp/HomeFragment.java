@@ -2,14 +2,17 @@ package com.example.patrick.halitranapp;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,6 +42,9 @@ public class HomeFragment extends Fragment {
     private ArrayAdapter<Message> adapter;
     private HalitranApplication mApp;
     private Button refreshButton;
+    private LinearLayout inputLayout;
+    private EditText inputEditText;
+    private Button sendMessageButton;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -72,6 +78,9 @@ public class HomeFragment extends Fragment {
         Log.i("Fragment", "onCreateView");
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         listView = (ListView) view.findViewById(R.id.listView);
+        sendMessageButton = (Button) view.findViewById(R.id.sendMessage);
+        inputLayout = (LinearLayout) view.findViewById(R.id.inputLayout);
+        inputEditText = (EditText) view.findViewById(R.id.inputEditText);
         refreshButton = (Button) view.findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,14 +88,83 @@ public class HomeFragment extends Fragment {
                 loadMessages();
             }
         });
+        sendMessageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {sendMessage();}
+        });
+
+        inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                refreshButtonState();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
         mApp = (HalitranApplication) getActivity().getApplication();
         adapter = new MessageAdapter(getActivity(), mApp.getMessages(), mApp);
         listView.setAdapter(adapter);
         if (mApp.getMessages().size() == 0) {
             loadMessages();
         }
+        if (mApp.getLogin() != null) {
+            inputLayout.setVisibility(View.VISIBLE);
+        }
         return view;
     }
+
+    private void refreshButtonState() {
+        String content = inputEditText.getText().toString();
+        boolean ok = content.length() > 0
+                && content.length() < 140;
+        sendMessageButton.setEnabled(ok);
+    }
+
+    public void sendMessage() {
+        String content = inputEditText.getText().toString();
+        content = content.replaceAll(" ","%20");
+        String url = Util.ServerAdress+Util.ADD_TWEET;
+        url = Util.addFirstParameter(url, "key", mApp.getKey());
+        url = Util.addParameter(url, "content", content);
+        url = Util.addParameter(url, "mentions", "");
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        if (!response.has("erreur")) {
+                            inputEditText.setText("");
+                            Toast.makeText(mApp, "Message envoye", Toast.LENGTH_SHORT).show();
+                            loadMessages();
+                        }
+                        else {
+                            try {
+                                Toast.makeText(mApp, response.getString("message"), Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                Log.i("json error", e.getMessage());
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("sendMessage", "onErrorResponse - "+error.getMessage().toString());
+                        Toast.makeText(mApp, "Probleme reseau", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        mApp.getRequestQueue().add(request);
+    }
+
 
     public void loadMessages() {
         Log.i("GASGSG", "loadMessages");
