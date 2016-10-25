@@ -1,7 +1,10 @@
 package com.example.patrick.halitranapp;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,6 +158,12 @@ public class AccountFragment extends Fragment {
                         try {
                             //System.out.println(response.toString());
                             if(response.has("erreur")){
+                                String msg = response.getString("message");
+                                if(msg.equals("Your session has time out")){
+                                    //reconnexion
+                                    reconnexion();
+                                    /* Ici refaire l'action de changerPassword avec un runnable ? */
+                                }
                                 Toast.makeText(application.getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
                             }else if(response.has("Password successfully changed")){
                                 Toast.makeText(application.getApplicationContext(), "Password successfully changed", Toast.LENGTH_LONG).show();
@@ -176,6 +185,42 @@ public class AccountFragment extends Fragment {
         });
 
         rq.add(jsonRequest);
+    }
+
+    public void reconnexion(){
+        String login = application.getSharedPreferences("user", Context.MODE_PRIVATE).getString("Login", "");
+        String password = application.getSharedPreferences("user", Context.MODE_PRIVATE).getString("Password", "");
+
+        /* Requete de connexion */
+        String loginRequestUrl = Util.ServerAdress + Util.LOGIN;
+        loginRequestUrl = Util.addFirstParameter(loginRequestUrl, "login", login);
+        loginRequestUrl = Util.addParameter(loginRequestUrl, "password", password);
+        Log.i("URL", loginRequestUrl);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, loginRequestUrl, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (!response.has("erreur")) {
+                                application.setId(response.getInt("id"));
+                                application.setKey(response.getString("key"));
+                                application.setLogin(response.getString("login"));
+                            } else {
+                                Toast.makeText(application, response.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            Log.i("LoginActivity", "onResponse - " + e.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("LoginActivity", "onErrorResponse - " + error.getMessage().toString());
+                        Toast.makeText(application, "Probleme reseau", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        application.getRequestQueue().add(jsonObjectRequest);
     }
 
 }
