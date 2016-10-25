@@ -43,6 +43,14 @@ public class HalitranApplication extends Application {
                 .apply();
     }
 
+    public void clearUsersId() {
+        // efface les données utilisateur
+        getSharedPreferences("user", MODE_PRIVATE)
+                .edit()
+                .clear()
+                .apply();
+    }
+
     public String getLogin() {
         return login;
     }
