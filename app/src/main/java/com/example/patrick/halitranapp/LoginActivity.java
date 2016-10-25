@@ -43,6 +43,10 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.loginButton);
         resetButton = (Button) findViewById(R.id.resetButton);
 
+        /* Connecter l'utilisateur déjà loggé */
+        if(isUserLogged())
+            connexionDuplicata();
+
         loginEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -79,14 +83,34 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        /* Connecter l'utilisateur déjà loggé */
+        if(isUserLogged()) {
+            Log.i("onRestart", "je passe ici");
+            connexionDuplicata();
+        }
+    }
+
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        /* Connecter l'utilisateur déjà loggé */
+        if(isUserLogged()) {
+            Log.i("onRestart", "je passe ici");
+            connexionDuplicata();
+        }
+    }
+
     protected void refreshButtonsStates() {
         loginButton.setEnabled(isLoginValid && isPasswordValid);
         resetButton.setEnabled(isLoginValid && isPasswordValid);
     }
 
-    public void connexion(View view) {
-        String login = loginEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
+    public void connexionDuplicata(){
+        final String login = loginEditText.getText().toString();
+        final String password = passwordEditText.getText().toString();
         String loginRequestUrl = Util.ServerAdress+Util.LOGIN;
         loginRequestUrl = Util.addFirstParameter(loginRequestUrl,"login",login);
         loginRequestUrl = Util.addParameter(loginRequestUrl,"password", password);
@@ -106,6 +130,8 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else {
                                 Toast.makeText(mApp, response.getString("message"), Toast.LENGTH_SHORT).show();
+                                /* Enregistrer les id utilisateurs dans les preferences */
+                                mApp.saveUsersId(login, password);
                             }
                         } catch (JSONException e) {
                             Log.i("LoginActivity", "onResponse - "+e.getMessage());
@@ -122,7 +148,10 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
         mApp.getRequestQueue().add(jsonObjectRequest);
+    }
 
+    public void connexion(View view) {
+        connexionDuplicata();
     }
 
     public void resetForm(View view) {
@@ -133,6 +162,18 @@ public class LoginActivity extends AppCompatActivity {
     public void openCreateUserActivity(View view) {
         //Toast.makeText(this, "Not Implemented Yet", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, RegisterActivity.class));
+    }
+
+    /* méthode pour vérifier si un uilisateur est loggé */
+    private boolean isUserLogged(){
+        if(mApp.getSharedPreferences("user", MODE_PRIVATE).contains("Login")
+                && mApp.getSharedPreferences("user", MODE_PRIVATE).contains("Password")){
+            loginEditText.setText(mApp.getSharedPreferences("user", MODE_PRIVATE).getString("Login", ""));
+            passwordEditText.setText(mApp.getSharedPreferences("user", MODE_PRIVATE).getString("Password", ""));
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
