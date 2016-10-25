@@ -1,6 +1,7 @@
 package com.example.patrick.halitranapp;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.android.volley.Cache;
@@ -30,6 +31,13 @@ public class HalitranApplication extends Application {
     public void onCreate() {
         super.onCreate();
         messages = new ArrayList<Message>();
+
+        // ça c'est pour garder le login et pwd de l'utilisateur dans un fichier afin de ne pas se reco à chaque fois
+        // crée un fichier preferences avec ses id
+        /*getSharedPreferences("user", MODE_PRIVATE)
+                .edit()
+                .putString("", "")
+        .commit();*/
     }
 
     public String getLogin() {

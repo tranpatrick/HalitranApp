@@ -1,166 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginTop="10dp"
-        android:text="@string/myaccount"
-        android:textSize="25dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="@string/changeaccountparameter"
-        android:textSize="15dp"
-        />
-
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
     <LinearLayout
-        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/username"
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:text="@string/myaccount"
+            android:textSize="25dp"
             />
-
-        <EditText
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/account_username"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/mailaddress"
+            android:layout_gravity="left"
+            android:text="@string/changeaccountparameter"
+            android:textSize="15dp"
             />
 
-        <EditText
-            android:layout_width="150dp"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/account_mailaddress"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/username"
+                />
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/account_username"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/mailaddress"
+                />
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionDone"
+                android:id="@+id/account_mailaddress"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:textSize="10dp"
+            android:text="@string/savechanges"
+            android:id="@+id/mailsavechanges"
             />
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:textSize="10dp"
-        android:text="@string/savechanges"
-        android:id="@+id/mailsavechanges"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginTop="20dp"
-        android:text="@string/passwordAccount"
-        android:textSize="25dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="@string/changepassword"
-        android:textSize="15dp"
-        />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/currentpassword"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:text="@string/passwordAccount"
+            android:textSize="25dp"
             />
-
-        <EditText
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/account_currentpassword"
-            android:inputType="textPassword"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/newpassword"
+            android:layout_gravity="left"
+            android:text="@string/changepassword"
+            android:textSize="15dp"
             />
 
-        <EditText
-            android:layout_width="150dp"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:id="@+id/account_newpassword"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/currentpassword"
+                />
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/account_currentpassword"
+                android:inputType="textPassword"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/newpassword"
+                />
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/account_newpassword"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/confirmpassword"
+                />
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/account_confirmpassword"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:textSize="10dp"
+            android:text="@string/savechanges"
+            android:id="@+id/pwdsavechanges"
             />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/confirmpassword"
-            />
-
-        <EditText
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:id="@+id/account_confirmpassword"
-            />
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:textSize="10dp"
-        android:text="@string/savechanges"
-        android:id="@+id/pwdsavechanges"
-        />
-
-</LinearLayout>
+</ScrollView>

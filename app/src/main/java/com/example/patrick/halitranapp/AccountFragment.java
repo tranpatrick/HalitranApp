@@ -94,7 +94,7 @@ public class AccountFragment extends Fragment {
                                 //System.out.println(response.toString());
                                 if(response.has("erreur")){
                                     Toast.makeText(application.getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
-                                }else if(response.has("JSON")){
+                                }else if(response.has("Mail address successfully changed")){
                                     Toast.makeText(application.getApplicationContext(), "Mail address successfully changed", Toast.LENGTH_LONG).show();
                                 }else{
                                     Toast.makeText(application.getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
@@ -109,6 +109,7 @@ public class AccountFragment extends Fragment {
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
+
                     error.printStackTrace();
                 }
             });
@@ -155,7 +156,7 @@ public class AccountFragment extends Fragment {
                             //System.out.println(response.toString());
                             if(response.has("erreur")){
                                 Toast.makeText(application.getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
-                            }else if(response.has("JSON")){
+                            }else if(response.has("Password successfully changed")){
                                 Toast.makeText(application.getApplicationContext(), "Password successfully changed", Toast.LENGTH_LONG).show();
                             }else{
                                 Toast.makeText(application.getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
