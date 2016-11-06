@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,21 +38,26 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <Button
-                    android:text="refresh"
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/sync"
                     android:id="@+id/refreshButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="viewStart" />
+                    android:background="@null"
+                    android:layout_marginBottom="8dp"/>
 
-                <Button
+                <ImageButton
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/send"
                     android:id="@+id/sendMessage"
-                    android:enabled="false"
-                    android:text="send"/>
+                    android:background="@null" />
+
+
 
             </LinearLayout>
 
@@ -60,7 +66,9 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"></ListView>
+            android:id="@+id/listView"
+            android:scrollbarThumbVertical="@android:color/holo_purple"
+            android:scrollbarSize="2dp"></ListView>
 
     </LinearLayout>
 </FrameLayout>

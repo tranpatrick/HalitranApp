@@ -25,7 +25,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener,
     MyProfileFragment.OnFragmentInteractionListener,
-    SearchFragment.OnFragmentInteractionListener{
+    SearchFragment.OnFragmentInteractionListener,
+    UserProfileFragment.OnFragmentInteractionListener{
     private HalitranApplication mApp;
     private TextView textView;
 
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     private ActionBarDrawerToggle drawerToggle;
     private CharSequence mTitle;
     private CharSequence drawerTitle;
+    public static FragmentManager fm;
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         setContentView(R.layout.drawer_layout);
 
         mApp = (HalitranApplication) getApplication();
+        fm = getFragmentManager();
         /*textView = (TextView) findViewById(R.id.textView);
 
         if (mApp.getKey()!= null) {
