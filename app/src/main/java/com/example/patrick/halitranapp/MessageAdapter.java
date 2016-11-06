@@ -2,6 +2,7 @@ package com.example.patrick.halitranapp;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+
+import static com.example.patrick.halitranapp.R.drawable.comment;
+import static com.example.patrick.halitranapp.R.drawable.delete;
+import static com.example.patrick.halitranapp.R.drawable.reply;
 
 /**
  * Created by ladislas on 13/10/2016.
@@ -65,16 +70,35 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         holder.date.setText(message.getDate());
         holder.auteur.setText(message.getAuteur().getLogin());
 
-        /* On affiche le bouton de suppression si l'utilisateur connecte est l'auteur du tweet */
-        if (mApp.getId() == message.getAuteur().getId()) {
+        if (!holder.auteur.getText().toString().equals(mApp.getLogin())) {
+            holder.auteur.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    createProfilLink(holder.auteur.getText().toString());
+                }
+            });
+        }
 
+        /* On affiche le bouton de suppression si l'utilisateur connecte est l'auteur du tweet */
+
+
+        if (mApp.getId() == message.getAuteur().getId()) {
+            holder.imageView.setImageResource(delete);
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     removeMessageFromMongo(message);
                 }
             });
-            holder.imageView.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.imageView.setImageResource(reply);
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mApp, "ajouter @"+holder.auteur.getText().toString()+"dans l'editText", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         return convertView;
     }
@@ -109,5 +133,11 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                     }
                 });
         mApp.getRequestQueue().add(request);
+    }
+
+    public void createProfilLink(String profilName) {
+        String url = Util.ServerAdress+Util.DISPLAY_PROFIL_INFO;
+        url = Util.addFirstParameter(url, "profil_name", profilName);
+        Log.i("ONCLICK", url);
     }
 }

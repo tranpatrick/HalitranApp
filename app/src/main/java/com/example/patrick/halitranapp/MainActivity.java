@@ -2,9 +2,6 @@ package com.example.patrick.halitranapp;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.SearchManager;
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,21 +13,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.annotation.TargetApi;
-import android.app.ActivityOptions;
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.transition.Explode;
-import android.transition.Fade;
-import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
 
 //TODO supprimer activity_main layout
 
-public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener,
+    MyProfileFragment.OnFragmentInteractionListener {
     private HalitranApplication mApp;
     private TextView textView;
 
@@ -161,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         if(position == 0) {
             fragment = new HomeFragment();
         }else if(position == 1) {
-            //fragment = new ProfileFragment();
+            fragment = new MyProfileFragment();
         }else
             fragment = new AccountFragment();
 

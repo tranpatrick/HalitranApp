@@ -15,6 +15,8 @@ public class Util {
     public static final String ADD_TWEET = "Tweet/Add";
     public static final String CHANGE_MAIL = "User/ChangeMail";
     public static final String CHANGE_PASSWORD = "User/ChangePassword";
+    public static final String DISPLAY_PROFIL_INFO = "User/Profile/DisplayProfileInfo";
+    public static final String DISPLAY_PROFIL_TWEETS = "User/Profile/DisplayProfileTweets";
 
     public static String addFirstParameter(String url, String parameter, String value) {
         return url+"?"+parameter+"="+value;

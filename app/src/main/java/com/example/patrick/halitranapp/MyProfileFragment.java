@@ -29,12 +29,12 @@ import org.json.JSONObject;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HomeFragment.OnFragmentInteractionListener} interface
+ * {@link MyProfileFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link MyProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class MyProfileFragment extends Fragment {
 
 
     private OnFragmentInteractionListener mListener;
@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
     private EditText inputEditText;
     private Button sendMessageButton;
 
-    public HomeFragment() {
+    public MyProfileFragment() {
         // Required empty public constructor
     }
 
@@ -59,8 +59,8 @@ public class HomeFragment extends Fragment {
      * @return A new instance of fragment HomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+    public static MyProfileFragment newInstance(String param1, String param2) {
+        MyProfileFragment fragment = new MyProfileFragment();
         Bundle args = new Bundle();
         return fragment;
     }
@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.i("Fragment", "onCreateView");
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
         listView = (ListView) view.findViewById(R.id.listView);
         sendMessageButton = (Button) view.findViewById(R.id.sendMessage);
         inputLayout = (LinearLayout) view.findViewById(R.id.inputLayout);
@@ -166,7 +166,8 @@ public class HomeFragment extends Fragment {
 
     public void loadMessages() {
         Log.i("GASGSG", "loadMessages");
-        String url = Util.ServerAdress+Util.DISPLAY_TWEET;
+        String url = Util.ServerAdress+Util.DISPLAY_PROFIL_TWEETS;
+        url = Util.addFirstParameter(url, "profil_name", mApp.getLogin());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override

@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp">
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/auteur"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="normal|bold" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/bin"
+            android:layout_width="18dp"
+            android:layout_height="19dp"
+            android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/imageView"
-            android:visibility="invisible"/>
+            android:id="@+id/imageView"/>
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/imageView" />
+            android:layout_toStartOf="@+id/imageView"
+            android:textColor="@android:color/darker_gray" />
 
     </RelativeLayout>
 
     <TextView
         android:id="@+id/texte"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black" />
 
 </LinearLayout>
