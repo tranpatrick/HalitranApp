@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         mApp = (HalitranApplication) getApplication();
         /*textView = (TextView) findViewById(R.id.textView);
 
-
         if (mApp.getKey()!= null) {
             textView.setText("");
             textView.append(mApp.getId()+"\n");

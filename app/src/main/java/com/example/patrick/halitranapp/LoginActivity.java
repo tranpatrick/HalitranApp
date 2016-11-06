@@ -91,8 +91,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void connexionDuplicata() {
-        final String login = loginEditText.getText().toString();
-        final String password = passwordEditText.getText().toString();
+        final String login;
+        final String password;
+        if(isUserLogged()) {
+            login = loginEditText.getText().toString();
+            password = passwordEditText.getText().toString();
+        }else{
+            login = loginEditText.getText().toString();
+            password = passwordEditText.getText().toString();
+        }
         String loginRequestUrl = Util.ServerAdress + Util.LOGIN;
         loginRequestUrl = Util.addFirstParameter(loginRequestUrl, "login", login);
         loginRequestUrl = Util.addParameter(loginRequestUrl, "password", password);
@@ -151,8 +158,8 @@ public class LoginActivity extends AppCompatActivity {
         Log.i("isUserLogged", "je passe dans isUserLogged");
         if (getSharedPreferences("user", MODE_PRIVATE).contains("Login")
                 && getSharedPreferences("user", MODE_PRIVATE).contains("Password")) {
-            loginEditText.setText(mApp.getSharedPreferences("user", MODE_PRIVATE).getString("Login", ""));
-            passwordEditText.setText(mApp.getSharedPreferences("user", MODE_PRIVATE).getString("Password", ""));
+//            loginEditText.setText(mApp.getSharedPreferences("user", MODE_PRIVATE).getString("Login", ""));
+//            passwordEditText.setText(mApp.getSharedPreferences("user", MODE_PRIVATE).getString("Password", ""));
             return true;
         } else {
             return false;
