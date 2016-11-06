@@ -92,7 +92,7 @@ public class SplashActivity extends AppCompatActivity {
                                 finish();
                             } else {
                                 Toast.makeText(mApp, response.getString("message"), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(mApp, LoginActivity.class);
+                                Intent intent = new Intent(mApp, LoginActivityNew.class);
                                 startActivity(intent);
                                 finish();
                             }

@@ -21,11 +21,9 @@
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name=".LoginActivity"/>
         <activity android:name=".LoginActivityNew" android:theme="@style/AppTheme_Dark"/>
         <activity android:name=".RegisterActivityNew" android:theme="@style/AppTheme_Dark"/>
 
-        <activity android:name=".RegisterActivity" />
         <activity android:name=".GetMessageActivity" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
