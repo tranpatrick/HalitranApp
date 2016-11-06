@@ -4,12 +4,14 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,6 +27,8 @@ import org.json.JSONObject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import butterknife.InjectView;
+
 /**
  * Created by Patrick on 18/10/2016.
  */
@@ -36,6 +40,7 @@ public class AccountFragment extends Fragment {
     EditText currentPassword;
     EditText newPassword;
     EditText confirmPassword;
+
     Button mailSaveButton;
     Button pwdSaveButton;
 
@@ -47,7 +52,7 @@ public class AccountFragment extends Fragment {
 
         application = (HalitranApplication) getActivity().getApplication();
 
-        View view = inflater.inflate(R.layout.fragment_account, container, false);
+        View view = inflater.inflate(R.layout.fragment_account_new, container, false);
         username = (EditText) view.findViewById(R.id.account_username);
         mailAddress = (EditText) view.findViewById(R.id.account_mailaddress);
         currentPassword = (EditText) view.findViewById(R.id.account_currentpassword);
