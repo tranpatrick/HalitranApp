@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HalitranApp</string>
+    <string name="app_name">Halitran</string>
     <string name="loginHint">login</string>
     <string name="passwordHint">password</string>
     <string name="confirmPasswordHint">confirm password</string>
