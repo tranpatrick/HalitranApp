@@ -8,38 +8,44 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:orientation="vertical"
-        android:padding="10dp"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true">
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="97dp"
+            android:padding="10dp"
             android:orientation="horizontal"
-            android:id="@+id/inputLayout">
+            android:id="@+id/inputLayout"
+            android:background="#006ec3">
 
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/inputEditText"
-                android:layout_weight="3"
+                android:layout_weight="20"
+                android:padding="10dp"
                 android:inputType="textMultiLine"
                 android:hint="Enter a message"
                 android:gravity="top"
                 android:textAppearance="@android:style/TextAppearance.Material.Small.Inverse"
+                android:textColorLink="?attr/colorPrimary"
+                android:textCursorDrawable="@null"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textColorHint="@android:color/holo_blue_dark"
-                android:textColorLink="?attr/colorPrimary"
-                android:backgroundTint="@android:color/holo_blue_light"
-                android:textCursorDrawable="@null"/>
+
+                android:background="@drawable/rounded_edittext"/>
+
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -50,13 +56,12 @@
                     android:layout_marginBottom="8dp"/>
 
                 <ImageButton
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="19dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/send"
                     android:id="@+id/sendMessage"
                     android:background="@null" />
-
 
 
             </LinearLayout>
@@ -66,8 +71,9 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:id="@+id/listView"
-            android:scrollbarThumbVertical="@android:color/holo_purple"
+            android:scrollbarThumbVertical="@android:color/holo_blue_light"
             android:scrollbarSize="2dp"></ListView>
 
     </LinearLayout>
