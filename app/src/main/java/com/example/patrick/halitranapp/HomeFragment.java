@@ -6,14 +6,17 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -41,10 +44,10 @@ public class HomeFragment extends Fragment {
     private ListView listView;
     private ArrayAdapter<Message> adapter;
     private HalitranApplication mApp;
-    private Button refreshButton;
+    private ImageButton refreshButton;
     private LinearLayout inputLayout;
     private EditText inputEditText;
-    private Button sendMessageButton;
+    private ImageButton sendMessageButton;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -78,10 +81,10 @@ public class HomeFragment extends Fragment {
         Log.i("Fragment", "onCreateView");
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         listView = (ListView) view.findViewById(R.id.listView);
-        sendMessageButton = (Button) view.findViewById(R.id.sendMessage);
+        sendMessageButton = (ImageButton) view.findViewById(R.id.sendMessage);
         inputLayout = (LinearLayout) view.findViewById(R.id.inputLayout);
         inputEditText = (EditText) view.findViewById(R.id.inputEditText);
-        refreshButton = (Button) view.findViewById(R.id.refreshButton);
+        refreshButton = (ImageButton) view.findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,8 +112,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-
+        
         mApp = (HalitranApplication) getActivity().getApplication();
         adapter = new MessageAdapter(getActivity(), mApp.getMessages(), mApp);
         listView.setAdapter(adapter);

@@ -1,8 +1,12 @@
 package com.example.patrick.halitranapp;
 
+import android.app.Activity;
 import android.app.Application;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +49,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
     }
 
     private HalitranApplication mApp;
+    private boolean displayAnswer = true;
 
     public MessageAdapter(Context context, List<Message> objects, Application mApp) {
         super(context, R.layout.list_message, objects);
@@ -102,7 +107,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 }
             });
         }
-        else {
+        else if (displayAnswer) {
             holder.imageView.setImageResource(reply);
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -113,6 +118,8 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         }
         return convertView;
     }
+
+    public void setDisplayAnswer(boolean b) {displayAnswer = b;}
 
     public void removeMessageFromMongo(final Message m) {
         String key = mApp.getKey();
@@ -147,9 +154,13 @@ public class MessageAdapter extends ArrayAdapter<Message> {
     }
 
     public void createProfilLink(String profilName) {
-        String url = Util.ServerAdress+Util.DISPLAY_PROFIL_INFO;
-        url = Util.addFirstParameter(url, "profil_name", profilName);
-        Log.i("ONCLICK", url);
+        Fragment fragment = new UserProfileFragment();
+        Bundle bundle = new Bundle();
+        bundle.putCharSequence("profilName", profilName);
+        fragment.setArguments(bundle);
+
+        FragmentManager fragmentManager = MainActivity.fm;
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
 
     public void answer(View v, String name) {
