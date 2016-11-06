@@ -49,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
                 }else{
                     /* lance activity login */
                     mApp.clearUsersId();
-                    Intent intent = new Intent(mApp, LoginActivity.class);
+                    Intent intent = new Intent(mApp, LoginActivityNew.class);
                     startActivity(intent);
                     finish();
                 }

@@ -60,10 +60,10 @@ public class RegisterActivity extends AppCompatActivity {
         pwd = pwd_edit_text.getText().toString();
         pwd_conf = pwdconf_edit_text.getText().toString();
 
-        /* if(login.equals("") || name.equals("") || lastname.equals("") || mail.equals("") || pwd.equals("") || pwd_conf.equals("")){
+        if(login.equals("") || name.equals("") || lastname.equals("") || mail.equals("") || pwd.equals("") || pwd_conf.equals("")){
             Toast.makeText(this, "Formulaire pas complet", 3).show();
             return;
-        } */
+        }
 
         /* Verification du pwd */
         if (!pwd.equals(pwd_conf)) {

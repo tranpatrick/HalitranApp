@@ -24,5 +24,17 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
+    <style name="AppTheme_Dark" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">#FFFFFF</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:background">#006ec3</item>
+        <item name="colorButtonNormal">#005fa9</item>
+    </style>
+
+    <style name="AppTheme_Dark_Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">#FFFFFF</item>
+        <item name="android:textColorPrimary">#CCCCCC</item>
+        <item name="android:background">#006ec3</item>
+    </style>
 
 </resources>

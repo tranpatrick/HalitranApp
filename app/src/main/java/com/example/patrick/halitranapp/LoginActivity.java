@@ -94,8 +94,8 @@ public class LoginActivity extends AppCompatActivity {
         final String login;
         final String password;
         if(isUserLogged()) {
-            login = loginEditText.getText().toString();
-            password = passwordEditText.getText().toString();
+            login = mApp.getSharedPreferences("user", MODE_PRIVATE).getString("Login", "");
+            password = mApp.getSharedPreferences("user", MODE_PRIVATE).getString("Password", "");
         }else{
             login = loginEditText.getText().toString();
             password = passwordEditText.getText().toString();
