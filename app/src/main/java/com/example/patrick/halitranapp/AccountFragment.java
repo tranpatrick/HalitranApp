@@ -1,7 +1,10 @@
 package com.example.patrick.halitranapp;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,8 +79,8 @@ public class AccountFragment extends Fragment {
         return view;
     }
 
-    public void saveChangeMail(){
-        if(isEmailValide(mailAddress.getText().toString())){
+    public void saveChangeMail() {
+        if (isEmailValide(mailAddress.getText().toString())) {
             /* Requete vers le serveur */
             String url = Util.ServerAdress + Util.CHANGE_MAIL + "?" +
                     "key=" + application.getKey() +
@@ -92,11 +95,17 @@ public class AccountFragment extends Fragment {
                         public void onResponse(JSONObject response) {
                             try {
                                 //System.out.println(response.toString());
-                                if(response.has("erreur")){
-                                    Toast.makeText(application.getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
-                                }else if(response.has("Mail address successfully changed")){
+                                if (response.has("erreur")) {
+                                    String msg = response.getString("message");
+                                    if (msg.equals("Your session has timed out")) {
+                                        //reconnexion
+                                        reconnexion();
+                                    /* Ici refaire l'action de changerMail avec un runnable ? */
+                                        (new saveMailRunnable()).run();
+                                    }
+                                } else if (response.has("Mail address successfully changed")) {
                                     Toast.makeText(application.getApplicationContext(), "Mail address successfully changed", Toast.LENGTH_LONG).show();
-                                }else{
+                                } else {
                                     Toast.makeText(application.getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
@@ -113,14 +122,13 @@ public class AccountFragment extends Fragment {
                     error.printStackTrace();
                 }
             });
-
             rq.add(jsonRequest);
-        }else{
+        } else {
             Toast.makeText(application.getApplicationContext(), "Invalid mail address format", Toast.LENGTH_LONG).show();
         }
     }
 
-    public boolean isEmailValide(String email){
+    public boolean isEmailValide(String email) {
         Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9]+.[a-zA-Z]{2,3}$");
         Matcher m = pattern.matcher(email);
         return m.matches();
@@ -134,7 +142,7 @@ public class AccountFragment extends Fragment {
             return;
         }
 
-        if (!newpwd.equals(confirmPassword.getText().toString())){
+        if (!newpwd.equals(confirmPassword.getText().toString())) {
             Toast.makeText(application.getApplicationContext(), "Passwords must match", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -154,11 +162,18 @@ public class AccountFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             //System.out.println(response.toString());
-                            if(response.has("erreur")){
-                                Toast.makeText(application.getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
-                            }else if(response.has("Password successfully changed")){
+                            if (response.has("erreur")) {
+                                Log.d("============", "HELLO1");
+                                String msg = response.getString("message");
+                                if (msg.equals("Your session has timed out")) {
+                                    //reconnexion
+                                    reconnexion();
+                                    /* Ici refaire l'action de changerPassword avec un runnable ? */
+                                    (new savePwRunnable()).run();
+                                }
+                            } else if (response.has("Password successfully changed")) {
                                 Toast.makeText(application.getApplicationContext(), "Password successfully changed", Toast.LENGTH_LONG).show();
-                            }else{
+                            } else {
                                 Toast.makeText(application.getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                                 return;
                             }
@@ -178,4 +193,146 @@ public class AccountFragment extends Fragment {
         rq.add(jsonRequest);
     }
 
+    public void reconnexion() {
+        String login = application.getSharedPreferences("user", Context.MODE_PRIVATE).getString("Login", "");
+        String password = application.getSharedPreferences("user", Context.MODE_PRIVATE).getString("Password", "");
+
+        /* Requete de connexion */
+        String loginRequestUrl = Util.ServerAdress + Util.LOGIN;
+        loginRequestUrl = Util.addFirstParameter(loginRequestUrl, "login", login);
+        loginRequestUrl = Util.addParameter(loginRequestUrl, "password", password);
+        Log.i("URL", loginRequestUrl);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, loginRequestUrl, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (!response.has("erreur")) {
+                                application.setId(response.getInt("id"));
+                                application.setKey(response.getString("key"));
+                                application.setLogin(response.getString("login"));
+                            } else {
+                                Toast.makeText(application, response.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            Log.i("LoginActivity", "onResponse - " + e.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("LoginActivity", "onErrorResponse - " + error.getMessage().toString());
+                        Toast.makeText(application, "Probleme reseau", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        application.getRequestQueue().add(jsonObjectRequest);
+    }
+
+
+    public class savePwRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            String newpwd = newPassword.getText().toString();
+
+            if (newpwd.length() < 6) {
+                Toast.makeText(application.getApplicationContext(), "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!newpwd.equals(confirmPassword.getText().toString())) {
+                Toast.makeText(application.getApplicationContext(), "Passwords must match", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+        /* Requete vers le serveur */
+            String url = Util.ServerAdress + Util.CHANGE_PASSWORD + "?" +
+                    "key=" + application.getKey() +
+                    "&newPwd=" + newpwd +
+                    "&oldPwd=" + currentPassword.getText().toString();
+
+            RequestQueue rq = Volley.newRequestQueue(application.getApplicationContext());
+
+            JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                    new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                //System.out.println(response.toString());
+                                if (response.has("erreur")) {
+                                    Toast.makeText(application.getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
+                                } else if (response.has("Password successfully changed")) {
+                                    Toast.makeText(application.getApplicationContext(), "Password successfully changed", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(application.getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
+                            } catch (JSONException je) {
+                                je.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
+
+            rq.add(jsonRequest);
+        }
+    }
+
+    public class saveMailRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            if (isEmailValide(mailAddress.getText().toString())) {
+            /* Requete vers le serveur */
+                String url = Util.ServerAdress + Util.CHANGE_MAIL + "?" +
+                        "key=" + application.getKey() +
+                        "&newMail=" + mailAddress.getText().toString();
+
+                RequestQueue rq = Volley.newRequestQueue(application.getApplicationContext());
+
+                JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                        new Response.Listener<JSONObject>() {
+
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    //System.out.println(response.toString());
+                                    if (response.has("erreur")) {
+                                        Toast.makeText(application.getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
+                                    } else if (response.has("Mail address successfully changed")) {
+                                        Toast.makeText(application.getApplicationContext(), "Mail address successfully changed", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(application.getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+
+                                } catch (JSONException je) {
+                                    je.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        error.printStackTrace();
+                    }
+                });
+
+                rq.add(jsonRequest);
+            } else {
+                Toast.makeText(application.getApplicationContext(), "Invalid mail address format", Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
 }
+

@@ -41,7 +41,15 @@ public class HalitranApplication extends Application {
                 .edit()
                 .putString("Login", login)
                 .putString("Password", pwd)
-                .commit();
+                .apply();
+    }
+
+    public void clearUsersId() {
+        // efface les données utilisateur
+        getSharedPreferences("user", MODE_PRIVATE)
+                .edit()
+                .clear()
+                .apply();
     }
 
     public String getLogin() {

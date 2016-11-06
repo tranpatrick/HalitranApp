@@ -2,10 +2,15 @@ package com.example.patrick.halitranapp;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.SearchManager;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Handler;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //TODO supprimer activity_main layout
 
@@ -30,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     private CharSequence mTitle;
     private CharSequence drawerTitle;
 
+    boolean doubleBackToExitPressedOnce = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -40,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         mApp = (HalitranApplication) getApplication();
         /*textView = (TextView) findViewById(R.id.textView);
 
-
         if (mApp.getKey()!= null) {
             textView.setText("");
             textView.append(mApp.getId()+"\n");
@@ -50,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
 
         /* Drawer */
         mTitle = drawerTitle = getTitle();
-        options = new String[]{"Home", "Profile", "Account"};
+        options = new String[]{"Home", "Profile", "Account", "", "Sign out"};
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -146,12 +153,19 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
     private void selectItem(int position) {
         // update the main content by replacing fragments
         Fragment fragment = null;
-        if(position == 0) {
+        if (position == 0) {
             fragment = new HomeFragment();
         }else if(position == 1) {
             fragment = new MyProfileFragment();
-        }else
+        } else if (position == 2) {
             fragment = new AccountFragment();
+        } else if (position == 4) {
+            // Deconnexion
+            deconnexion();
+            return;
+        } else {
+            return;
+        }
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
@@ -167,5 +181,30 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
         getActionBar().setTitle(mTitle);
     }
 
+    public void deconnexion(){
+        mApp.clearUsersId();
+        Intent intent = new Intent(mApp, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
 
 }
