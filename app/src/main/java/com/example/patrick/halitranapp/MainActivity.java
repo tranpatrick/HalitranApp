@@ -24,7 +24,8 @@ import android.widget.Toast;
 //TODO supprimer activity_main layout
 
 public class MainActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener,
-    MyProfileFragment.OnFragmentInteractionListener {
+    MyProfileFragment.OnFragmentInteractionListener,
+    SearchFragment.OnFragmentInteractionListener{
     private HalitranApplication mApp;
     private TextView textView;
 
@@ -146,7 +147,15 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnFr
             default:
                 return super.onOptionsItemSelected(item);
         }*/
-        return false;
+        switch(item.getItemId()) {
+            case R.id.action_search:
+                Fragment fragment = new SearchFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /* Permet de selectionner le fragment voulu */
