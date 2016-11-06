@@ -17,33 +17,42 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:background="@drawable/rounded"
+            android:padding="10dp"
             android:layout_marginBottom="5dp">
 
             <TextView
                 android:text="TextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/profil_name"
+                android:textSize="36sp"
+                android:textColor="@android:color/background_light"
                 android:textAlignment="center"
+                android:fontFamily="casual"
                 android:textStyle="normal|bold"
-                android:textSize="30sp"
-                android:textColor="@color/colorAccent" />
+                android:textAllCaps="false" />
 
             <TextView
                 android:text="TextView"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/bio"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:layout_marginTop="20dp"
-                android:textColor="@android:color/holo_orange_dark" />
+                android:textColor="?android:attr/textColorHintInverse"
+                android:textStyle="normal|bold"
+                android:fontFamily="sans-serif" />
         </LinearLayout>
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"></ListView>
+            android:id="@+id/listView"
+            android:scrollbarThumbVertical="@android:color/holo_blue_light"
+            android:scrollbarSize="2dp"></ListView>
 
     </LinearLayout>
 </FrameLayout>

@@ -48,7 +48,9 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"></ListView>
+            android:id="@+id/listView"
+            android:scrollbarThumbVertical="@android:color/holo_blue_light"
+            android:scrollbarSize="2dp"></ListView>
 
     </LinearLayout>
 </FrameLayout>
