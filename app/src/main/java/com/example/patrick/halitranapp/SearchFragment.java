@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class SearchFragment extends Fragment {
 
     private SearchFragment.OnFragmentInteractionListener mListener;
     private EditText inputEditText;
-    private Button searchButton;
+    private ImageButton searchButton;
     private ListView listView;
     private ArrayAdapter<Message> adapter;
 
@@ -59,7 +60,7 @@ public class SearchFragment extends Fragment {
         Log.i("Fragment", "onCreateView");
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         inputEditText = (EditText) view.findViewById(R.id.inputEditText);
-        searchButton = (Button) view.findViewById(R.id.searchButton);
+        searchButton = (ImageButton) view.findViewById(R.id.searchButton);
         listView = (ListView) view.findViewById(R.id.listView);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
