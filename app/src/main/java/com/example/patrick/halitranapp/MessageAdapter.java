@@ -7,8 +7,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +41,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         public TextView texte;
         public TextView auteur;
         public ImageView imageView;
+        public ViewGroup parent;
     }
 
     private HalitranApplication mApp;
@@ -50,7 +56,14 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_message, null);
+
             ViewHolder holder = new ViewHolder();
+            if (parent == null) {
+                Toast.makeText(mApp, "null", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                holder.parent = parent;
+            }
             holder.texte = (TextView) convertView.findViewById(R.id.texte);
             holder.date = (TextView) convertView.findViewById(R.id.date);
             holder.auteur = (TextView) convertView.findViewById(R.id.auteur);
@@ -63,6 +76,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
                 affiche un tableau avec les choix des liens
              */
         }
+
 
         final ViewHolder holder = (ViewHolder) convertView.getTag();
         final Message message = getItem(position);
@@ -79,9 +93,6 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             });
         }
 
-        /* On affiche le bouton de suppression si l'utilisateur connecte est l'auteur du tweet */
-
-
         if (mApp.getId() == message.getAuteur().getId()) {
             holder.imageView.setImageResource(delete);
             holder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +107,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mApp, "ajouter @"+holder.auteur.getText().toString()+"dans l'editText", Toast.LENGTH_SHORT).show();
+                    answer(v, holder.auteur.getText().toString());
                 }
             });
         }
@@ -139,5 +150,18 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         String url = Util.ServerAdress+Util.DISPLAY_PROFIL_INFO;
         url = Util.addFirstParameter(url, "profil_name", profilName);
         Log.i("ONCLICK", url);
+    }
+
+    public void answer(View v, String name) {
+        RelativeLayout r = (RelativeLayout) v.getParent();
+        LinearLayout l = (LinearLayout) r.getParent();
+        ListView lv = (ListView) l.getParent();
+        LinearLayout root = (LinearLayout) lv.getParent();
+        EditText editText = (EditText) root.findViewById(R.id.inputEditText);
+        editText.setText("@"+name+" ");
+        editText.requestFocus();
+        editText.setSelection(editText.getText().length());
+        InputMethodManager imm = (InputMethodManager) mApp.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
     }
 }
