@@ -1,8 +1,10 @@
 package com.example.patrick.halitranapp;
 
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Created by ladislas on 13/10/2016.
@@ -10,6 +12,17 @@ import java.util.GregorianCalendar;
 
 public class Message {
 
+    //TODO ajouter gestion des liens
+    /*
+
+
+    private List<URL> links;
+    private List<String> links2;
+
+    dans constructeur :
+    links = decodeMessageContent(texte);
+
+    */
     private String _id;
     private Long date;
     private String texte;

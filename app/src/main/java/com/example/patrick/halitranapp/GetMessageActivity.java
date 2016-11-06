@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 
 public class GetMessageActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener {
-
+//TODO  a supprimer, n'est plus utilise
     private ListView listView;
     private ArrayAdapter<Message> adapter;
     private HalitranApplication mApp;

@@ -26,6 +26,7 @@ public class HalitranApplication extends Application {
     private String key;
     private RequestQueue requestQueue;
     private List<Message> messages;
+    //TODO ptet rajouter des autres listes, 1 pour searchResult, 1 pour visite profil
 
     @Override
     public void onCreate() {
@@ -40,7 +41,15 @@ public class HalitranApplication extends Application {
                 .edit()
                 .putString("Login", login)
                 .putString("Password", pwd)
-                .commit();
+                .apply();
+    }
+
+    public void clearUsersId() {
+        // efface les données utilisateur
+        getSharedPreferences("user", MODE_PRIVATE)
+                .edit()
+                .clear()
+                .apply();
     }
 
     public String getLogin() {
