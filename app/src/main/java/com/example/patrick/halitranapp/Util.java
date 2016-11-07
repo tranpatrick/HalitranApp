@@ -18,6 +18,7 @@ public class Util {
     public static final String DISPLAY_PROFIL_INFO = "User/Profile/DisplayProfileInfo";
     public static final String DISPLAY_PROFIL_TWEETS = "User/Profile/DisplayProfileTweets";
     public static final String SEARCH = "Search";
+    public static final String FORGOT_PWD = "ForgottenPassword";
 
     public static String addFirstParameter(String url, String parameter, String value) {
         return url+"?"+parameter+"="+value;

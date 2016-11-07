@@ -37,6 +37,7 @@ public class LoginActivityNew extends AppCompatActivity {
     @InjectView(R.id.passwordEditText) EditText _passwordText;
     @InjectView(R.id.loginButton) Button _loginButton;
     @InjectView(R.id.createUserTextView) TextView _signupLink;
+    @InjectView(R.id.forgotPasswordTextView) TextView _forgotLink;
     HalitranApplication mApp;
     boolean isLoginValid;
     boolean isPasswordValid;
@@ -65,6 +66,16 @@ public class LoginActivityNew extends AppCompatActivity {
             public void onClick(View v) {
                 // Start the Signup activity
                 Intent intent = new Intent(getApplicationContext(), RegisterActivityNew.class);
+                startActivity(intent);
+            }
+        });
+
+        _forgotLink.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Start the Signup activity
+                Intent intent = new Intent(getApplicationContext(), ForgotMdpActivity.class);
                 startActivity(intent);
             }
         });
