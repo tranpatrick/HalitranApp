@@ -147,12 +147,14 @@ public class RegisterActivityNew extends AppCompatActivity {
         /* Verification du mail */
         if(!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
             Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show();
+            _signupButton.setEnabled(true);
             return;
         }
 
         /* Verification du pwd */
         if (!pwd.equals(pwd_conf)) {
             Toast.makeText(this, "Passwords must match", Toast.LENGTH_SHORT).show();
+            _signupButton.setEnabled(true);
             return;
         }
 
