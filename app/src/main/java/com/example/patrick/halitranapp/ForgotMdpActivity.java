@@ -94,7 +94,7 @@ public class ForgotMdpActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(ForgotMdpActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
+        progressDialog.setMessage("Please wait...");
         progressDialog.show();
 
         // TODO: Implement your own authentication logic here.
