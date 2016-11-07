@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -140,6 +141,12 @@ public class RegisterActivityNew extends AppCompatActivity {
 
         if (login.equals("") || name.equals("") || lastname.equals("") || mail.equals("") || pwd.equals("") || pwd_conf.equals("")) {
             Toast.makeText(this, "Missing informations", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        /* Verification du mail */
+        if(!Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+            Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show();
             return;
         }
 
