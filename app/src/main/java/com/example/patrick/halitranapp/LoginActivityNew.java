@@ -176,6 +176,7 @@ public class LoginActivityNew extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             } else {
+                                _loginButton.setEnabled(true);
                                 Toast.makeText(mApp, response.getString("message"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -187,6 +188,7 @@ public class LoginActivityNew extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i("LoginActivity", "onErrorResponse - " + error.getMessage().toString());
+                        _loginButton.setEnabled(true);
                         Toast.makeText(mApp, "Probleme reseau", Toast.LENGTH_SHORT).show();
                     }
                 });

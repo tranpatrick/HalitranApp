@@ -167,12 +167,14 @@ public class RegisterActivityNew extends AppCompatActivity {
                             //System.out.println(response.toString());
                             if (response.has("erreur")) {
                                 Toast.makeText(getApplicationContext(), response.getString("message"), Toast.LENGTH_LONG).show();
+                                _signupButton.setEnabled(true);
                             } else if (response.has("JSON")) {
                                 Toast.makeText(getApplicationContext(), "Account successfully created", Toast.LENGTH_LONG).show();
                                 /* retourner à l'activité de connexion */
                                 onSignupSuccess();
                             } else {
                                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                                _signupButton.setEnabled(true);
                                 return;
                             }
 
@@ -185,6 +187,7 @@ public class RegisterActivityNew extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                _signupButton.setEnabled(true);
             }
         });
 
