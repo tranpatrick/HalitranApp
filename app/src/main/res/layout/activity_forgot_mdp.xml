@@ -27,7 +27,7 @@
             <EditText android:id="@+id/mailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Adresse mail" />
+                android:hint="Mail address" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -39,7 +39,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:text="Récupérer mot de passe"
+            android:text="Send"
             android:enabled="false" />
 
     </LinearLayout>
