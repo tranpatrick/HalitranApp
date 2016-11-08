@@ -60,6 +60,8 @@ public class LoginActivityNew extends AppCompatActivity {
         });
         _loginButton.setAlpha(.5f);
 
+        mApp.clearUsersId();
+
         _signupLink.setOnClickListener(new View.OnClickListener() {
 
             @Override
