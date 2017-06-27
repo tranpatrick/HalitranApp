@@ -55,7 +55,7 @@ public class Message {
         Calendar c = new GregorianCalendar();
         c.setTimeInMillis(date);
         String jour = c.get(Calendar.DAY_OF_MONTH)+"";
-        String mois = c.get(Calendar.MONTH)+"";
+        String mois = (c.get(Calendar.MONTH)+1)+"";
         if (mois.length() == 1)
             mois = "0"+mois;
         String annee = c.get(Calendar.YEAR)+"";
